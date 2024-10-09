@@ -13,6 +13,7 @@
             align-items: center;
             height: 100vh; /* ビューポートの高さに合わせる */
             background-color: #f0f0f0;
+            user-select: none; /* すべての要素で選択を無効にする */
         }
 
         /* 星型エフェクトのスタイル */
@@ -46,6 +47,7 @@
             border: none;
             background-color: transparent;
             transition: opacity 2s ease-out; /* フェードアウト用のトランジション */
+            user-select: none; /* ボタン選択を無効に */
         }
 
         /* 画像のドラッグ禁止とポインター操作の無効化 */
@@ -60,6 +62,7 @@
             display: inline-block;
             overflow: visible; /* はみ出しを許容する */
         }
+
     </style>
 </head>
 <body>
