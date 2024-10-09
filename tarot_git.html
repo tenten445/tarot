@@ -13,7 +13,7 @@
             align-items: center;
             height: 100vh; /* ビューポートの高さに合わせる */
             background-color: #f0f0f0;
-            user-select: none; /* すべての要素で選択を無効にする */
+            user-select: none; /* 全体の選択を無効化 */
         }
 
         /* 星型エフェクトのスタイル */
@@ -62,7 +62,6 @@
             display: inline-block;
             overflow: visible; /* はみ出しを許容する */
         }
-
     </style>
 </head>
 <body>
@@ -93,6 +92,17 @@ document.getElementById('btn').addEventListener('pointerdown', () => {
             button.remove();
         }, 2000); // 2秒後に削除
     }, { once: true });
+});
+
+// 選択やコンテキストメニューを防ぐためにタッチイベントを無効化
+document.getElementById('btn').addEventListener('touchstart', (e) => {
+    e.preventDefault(); // デフォルトのタッチ挙動を無効化
+});
+
+// コピー操作を完全に無効化
+document.addEventListener('copy', (e) => {
+    e.preventDefault(); // コピー操作をキャンセル
+    alert("コピーは禁止されています"); // 必要に応じてメッセージを表示
 });
 
 const increment = () => {
