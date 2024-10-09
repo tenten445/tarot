@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="jp">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +12,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* ビューポートの高さに合わせる */
+            height: 100vh;
+            /* ビューポートの高さに合わせる */
             background-color: #f0f0f0;
-            user-select: none; /* 全体の選択を無効化 */
+            user-select: none;
+            /* 全体の選択を無効化 */
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+
         }
 
         /* 星型エフェクトのスタイル */
@@ -24,8 +32,10 @@
             background: radial-gradient(circle, white 0%, transparent 70%);
             opacity: 0;
             animation: sparkle 1.5s ease-out infinite;
-            pointer-events: none; /* クリックできないようにする */
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* 星型 */
+            pointer-events: none;
+            /* クリックできないようにする */
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            /* 星型 */
         }
 
         @keyframes sparkle {
@@ -33,6 +43,7 @@
                 opacity: 1;
                 transform: scale(0.5);
             }
+
             100% {
                 opacity: 0;
                 transform: scale(3);
@@ -46,100 +57,111 @@
             height: 150px;
             border: none;
             background-color: transparent;
-            transition: opacity 2s ease-out; /* フェードアウト用のトランジション */
-            user-select: none; /* ボタン選択を無効に */
+            transition: opacity 2s ease-out;
+            /* フェードアウト用のトランジション */
+            user-select: none;
+            /* ボタン選択を無効に */
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         /* 画像のドラッグ禁止とポインター操作の無効化 */
         #btn img {
-            user-drag: none; /* ドラッグ禁止 */
-            pointer-events: none; /* クリックやタッチ操作も無効化 */
+            user-drag: none;
+            /* ドラッグ禁止 */
+            pointer-events: none;
+            /* クリックやタッチ操作も無効化 */
         }
 
         /* キラキラエフェクトがボタンからはみ出すのを許容 */
         #btn-wrapper {
             position: relative;
             display: inline-block;
-            overflow: visible; /* はみ出しを許容する */
+            overflow: visible;
+            /* はみ出しを許容する */
         }
     </style>
 </head>
+
 <body>
 
-<div id="btn-wrapper">
-    <button id="btn" style="touch-action: none; user-select: none;" oncontextmenu="return false;">
-        <img src="tarot/ura.jpg" alt="card image">
-    </button>
-</div>
+    <div id="btn-wrapper">
+        <button id="btn" style="touch-action: none; user-select: none;" oncontextmenu="return false;">
+            <img src="tarot/ura.jpg" alt="card image">
+        </button>
+    </div>
 
-<script>
-let currentNum = Math.floor(Math.random() * 256); // 0から255までの乱数を生成
+    <script>
+        let currentNum = Math.floor(Math.random() * 256); // 0から255までの乱数を生成
 
-document.getElementById('btn').addEventListener('pointerdown', () => {
-    const intervalId = setInterval(increment, 50);
-    const sparkleIntervalId = setInterval(createSparkle, 50); // より頻繁にエフェクトを出す
+        document.getElementById('btn').addEventListener('pointerdown', () => {
+            const intervalId = setInterval(increment, 50);
+            const sparkleIntervalId = setInterval(createSparkle, 50); // より頻繁にエフェクトを出す
 
-    document.addEventListener('pointerup', () => {
-        clearInterval(intervalId);
-        clearInterval(sparkleIntervalId);
-        
-        // ボタンをゆっくりフェードアウトさせる
-        const button = document.getElementById('btn');
-        button.style.opacity = '0'; // 徐々に透明に
+            document.addEventListener('pointerup', () => {
+                clearInterval(intervalId);
+                clearInterval(sparkleIntervalId);
 
-        // フェードアウト完了後にボタンを削除
-        setTimeout(() => {
-            button.remove();
-        }, 2000); // 2秒後に削除
-    }, { once: true });
-});
+                // ボタンをゆっくりフェードアウトさせる
+                const button = document.getElementById('btn');
+                button.style.opacity = '0'; // 徐々に透明に
 
-// 選択やコンテキストメニューを防ぐためにタッチイベントを無効化
-document.getElementById('btn').addEventListener('touchstart', (e) => {
-    e.preventDefault(); // デフォルトのタッチ挙動を無効化
-});
+                // フェードアウト完了後にボタンを削除
+                setTimeout(() => {
+                    button.remove();
+                }, 2000); // 2秒後に削除
+            }, { once: true });
+        });
 
-// コピー操作を完全に無効化
-document.addEventListener('copy', (e) => {
-    e.preventDefault(); // コピー操作をキャンセル
-    alert("コピーは禁止されています"); // 必要に応じてメッセージを表示
-});
+        // 選択やコンテキストメニューを防ぐためにタッチイベントを無効化
+        document.getElementById('btn').addEventListener('touchstart', (e) => {
+            e.preventDefault(); // デフォルトのタッチ挙動を無効化
+        });
 
-const increment = () => {
-    const target = document.getElementById('target');
-    currentNum++;
+        // コピー操作を完全に無効化
+        document.addEventListener('copy', (e) => {
+            e.preventDefault(); // コピー操作をキャンセル
+            alert("コピーは禁止されています"); // 必要に応じてメッセージを表示
+        });
 
-    if(currentNum > 256) currentNum = 0;
+        const increment = () => {
+            const target = document.getElementById('target');
+            currentNum++;
 
-    target.textContent = currentNum;
-}
+            if (currentNum > 256) currentNum = 0;
 
-const createSparkle = () => {
-    const btnWrapper = document.getElementById('btn-wrapper');
-    const sparkle = document.createElement('div');
-    sparkle.classList.add('sparkle');
+            target.textContent = currentNum;
+        }
 
-    // ボタンの周りにランダムな位置を設定（ボタンの外側にも広がる）
-    const size = btnWrapper.getBoundingClientRect();
-    const x = Math.random() * (size.width + 100) - 50; // ボタン外50pxまで広がる
-    const y = Math.random() * (size.height + 100) - 50; // 上下にも50px広がる
-    
-    sparkle.style.left = `${x}px`;
-    sparkle.style.top = `${y}px`;
+        const createSparkle = () => {
+            const btnWrapper = document.getElementById('btn-wrapper');
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
 
-    // HSL色を使って、currentNumに応じて色を変える
-    const hue = currentNum % 360; // 0-359の範囲で色相を変える
-    sparkle.style.background = `radial-gradient(circle, hsl(${hue}, 100%, 70%) 0%, transparent 70%)`;
+            // ボタンの周りにランダムな位置を設定（ボタンの外側にも広がる）
+            const size = btnWrapper.getBoundingClientRect();
+            const x = Math.random() * (size.width + 100) - 50; // ボタン外50pxまで広がる
+            const y = Math.random() * (size.height + 100) - 50; // 上下にも50px広がる
 
-    // ボタンラッパーの中にキラキラを追加
-    btnWrapper.appendChild(sparkle);
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
 
-    // 1.5秒後にエフェクトを削除
-    setTimeout(() => {
-        sparkle.remove();
-    }, 1500);
-}
-</script>
+            // HSL色を使って、currentNumに応じて色を変える
+            const hue = currentNum % 360; // 0-359の範囲で色相を変える
+            sparkle.style.background = `radial-gradient(circle, hsl(${hue}, 100%, 70%) 0%, transparent 70%)`;
+
+            // ボタンラッパーの中にキラキラを追加
+            btnWrapper.appendChild(sparkle);
+
+            // 1.5秒後にエフェクトを削除
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1500);
+        }
+    </script>
 
 </body>
+
 </html>
