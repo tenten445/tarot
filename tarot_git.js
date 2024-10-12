@@ -93,9 +93,9 @@
         const moveThreeCards = () => {
             // 表示させる位置
             const positions = [
-                { left: '35%', top: '60%' },
+                { left: '30%', top: '60%' },
                 { left: '50%', top: '60%' },
-                { left: '65%', top: '60%' }
+                { left: '70%', top: '60%' }
             ];
         
             // 3枚のカードをランダムに選ぶ（既存のcards配列から）
