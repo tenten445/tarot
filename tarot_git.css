@@ -16,6 +16,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     overflow: hidden;
+　   background-attachment: fixed; /* 追加
 }
 
 /* より大きな星と月の背景 */
@@ -30,6 +31,7 @@ body::before {
     opacity: 0.5;
     z-index: -2;
     animation: moveStars 60s linear infinite; /* 星を動かすアニメーションを追加 */
+    will-change: transform, opacity; /* 追加 */
 }
 #btn img {
     user-drag: none;
@@ -115,7 +117,10 @@ body::before {
     background-size: cover;
     transition: transform 1.5s ease-out, top 1.5s ease-out, left 1.5s ease-out;
     transform: translate(-50%, -50%);
+     -webkit-transform: translate(-50%, -50%); /* 追加 */
     z-index: 1;
+    backface-visibility: hidden; /* 追加 */
+    
 }
 
 /* 手前に移動させるスタイル */
