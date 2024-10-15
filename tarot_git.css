@@ -16,7 +16,8 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     overflow: hidden;
-　   background-attachment: fixed; /* 追加*/
+    background-attachment: fixed;
+    /* 追加*/
 }
 
 /* より大きな星と月の背景 */
@@ -30,9 +31,12 @@ body::before {
     background: url('https://www.transparenttextures.com/patterns/stardust.png');
     opacity: 0.5;
     z-index: -2;
-    animation: moveStars 60s linear infinite; /* 星を動かすアニメーションを追加 */
-    will-change: transform, opacity; /* 追加 */
+    animation: moveStars 60s linear infinite;
+    /* 星を動かすアニメーションを追加 */
+    will-change: transform, opacity;
+    /* 追加 */
 }
+
 #btn img {
     user-drag: none;
     /* ドラッグ禁止 */
@@ -117,16 +121,19 @@ body::before {
     background-size: cover;
     transition: transform 1.5s ease-out, top 1.5s ease-out, left 1.5s ease-out;
     transform: translate(-50%, -50%);
-     -webkit-transform: translate(-50%, -50%); /* 追加 */
+    -webkit-transform: translate(-50%, -50%);
+    /* 追加 */
     z-index: 1;
-    backface-visibility: hidden; /* 追加 */
-    
+    backface-visibility: hidden;
+    /* 追加 */
+
 }
 
 /* 手前に移動させるスタイル */
 .card.move-forward {
     transform: translate(-50%, -50%) translateY(-200px);
-    z-index: 10; /* 手前に移動させるためにz-indexを変更 */
+    z-index: 10;
+    /* 手前に移動させるためにz-indexを変更 */
 }
 
 
@@ -154,10 +161,12 @@ body::before {
         transform: scale(3);
     }
 }
+
 @keyframes moveStars {
     0% {
         transform: translate(0, 0);
     }
+
     100% {
         transform: translate(-50%, -50%);
     }
