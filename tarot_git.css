@@ -1,22 +1,10 @@
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     background: linear-gradient(135deg, #0d0d26 30%, #4b006e 70%);
     background-size: cover;
     background-position: center;
-    user-select: none;
-    overflow: hidden;
-    color: white;
-    font-family: 'Cairo', sans-serif;
-    position: relative;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    overflow: hidden;
+    background-attachment: fixed; /* 追加 */
 }
+
 
 /* より大きな星と月の背景 */
 body::before {
@@ -30,8 +18,7 @@ body::before {
     opacity: 0.5;
     z-index: -2;
     animation: moveStars 60s linear infinite;
-    /* 星を動かすアニメーションを追加 */
-
+    will-change: transform, opacity; /* 追加 */
 }
 
 #btn img {
