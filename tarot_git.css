@@ -117,9 +117,9 @@ body::before {
     background-size: cover;
     transition: transform 1.5s ease-out, top 1.5s ease-out, left 1.5s ease-out;
     transform: translate(-50%, -50%);
-    /* -webkit-transform: translate(-50%, -50%); /* 追加 */
+     -webkit-transform: translate(-50%, -50%); /* 追加 */
     z-index: 1;
-   /* backface-visibility: hidden; /* 追加 */
+    backface-visibility: hidden; /* 追加 */
     
 }
 
