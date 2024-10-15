@@ -3,6 +3,7 @@ const shuffleArea = document.getElementById('shuffle-area');
 let cards = [];
 var arr = [];
 var direction = [];
+var message;
 
 function make_random(max) {
     for (var i = 0; i < max; i++)
@@ -16,6 +17,58 @@ function make_random(max) {
     }
 }
 
+function Meaning_Tarot(number, reverse) {
+    var sum = number * 10 + reverse;
+
+    switch (sum) {
+        case 0: message = "楽観視 きまぐれ"; break;
+        case 1: message = "無計画 停滞"; break;
+        case 10: message = "挑戦 独創性"; break;
+        case 11: message = "自身をなくす"; break;
+        case 20: message = "知性的 常識的"; break;
+        case 21: message = "冷たさ 無神経"; break;
+        case 30: message = "豊かさ 優雅"; break;
+        case 31: message = "ワガママ 気の迷い"; break;
+        case 40: message = "責任感 実行力"; break;
+        case 41: message = "無責任 傲慢"; break;
+        case 50: message = "信頼 親切"; break;
+        case 51: message = "心の狭さ 孤立"; break;
+        case 60: message = "心がときめく"; break;
+        case 61: message = "中途半端 飽き"; break;
+        case 70: message = "前進 勝負に勝つ"; break;
+        case 71: message = "暴走 空回り"; break;
+        case 80: message = "強い意志 打ち克つ"; break;
+        case 81: message = "自信喪失 脱力"; break;
+        case 90: message = "静かさ 深く考える"; break;
+        case 91: message = "ネガティブ 疑い"; break;
+
+        case 100: message = "チャンス 自体の好転"; break;
+        case 101: message = "タイミングを逃す"; break;
+        case 110: message = "公平 真面目"; break;
+        case 111: message = "偏見 優柔不断"; break;
+        case 120: message = "試練 犠牲"; break;
+        case 121: message = "無駄な犠牲 徒労"; break;
+        case 130: message = "絶望 失敗"; break;
+        case 131: message = "イメージチェンジ"; break;
+        case 140: message = "穏やか 純粋"; break;
+        case 141: message = "マンネリ 怠惰"; break;
+        case 150: message = "束縛 悪だくみ"; break;
+        case 151: message = "現状打破"; break;
+        case 160: message = "破局 逆境"; break;
+        case 161: message = "崩壊寸前 混乱"; break;
+        case 170: message = "理想 希望"; break;
+        case 171: message = "幻滅 悲観"; break;
+        case 180: message = "不安 迷い"; break;
+        case 181: message = "状況が良くなる"; break;
+        case 190: message = "明るさ 名声"; break;
+        case 191: message = "暗さ 悲観的"; break;
+        case 200: message = "復活 良い知らせ"; break;
+        case 201: message = "罰 悪い知らせ"; break;
+        case 210: message = "完成 幸福感"; break;
+        case 211: message = "未完成 平凡さ"; break;
+
+    }
+}
 
 document.getElementById('btn').addEventListener('pointerdown', () => {
     const intervalId = setInterval(increment, 50);
@@ -124,7 +177,7 @@ const moveThreeCards = () => {
 
     selectedCards.forEach((card, index) => {
         direction[index] = Math.floor(Math.random() * 2);
-        const r = direction[index] === 1 ? 0 : 180; // 0度または180度に設定
+        const r = direction[index] === 0 ? 1 : 180; // 0度または180度に設定
 
 
         // カードを特定の位置に移動
@@ -140,12 +193,32 @@ const moveThreeCards = () => {
 
             // 回転中に新しい画像に差し替える
             setTimeout(() => {
+
                 console.log(arr[index]);
                 const newImage = `url('tarot/tarot_01_${arr[index]}.jpg')`;
                 card.style.backgroundImage = newImage;
 
                 //card.style.transform = 'translate(-50%, -50%) rotate(${r}deg)';
                 card.style.transform = `translate(-50%, -50%) rotateY(0deg)  rotate(${r}deg)`;
+
+                const label = document.createElement('div');
+                label.classList.add('card-label');
+                Meaning_Tarot(arr[index], direction[index])
+                label.innerText = message;
+                document.body.appendChild(label); // ラベルをbodyに直接追加
+
+                // ラベルのCSSスタイルを設定
+                label.style.position = 'absolute';
+                label.style.top = `calc(${positions[index].top} + 20%)`; // カードの少し上に表示
+                label.style.left = positions[index].left;
+                label.style.transform = 'translateX(-50%)';  // 水平中央に調整
+                label.style.color = 'white'; // テキストの色
+                label.style.fontSize = '18px';
+                label.style.fontWeight = 'bold';
+                label.style.textShadow = '2px 2px 4px rgba(255, 255, 255, 0.3)'; // テキストの影を追加して読みやすくする
+                label.style.pointerEvents = 'none'; // ラベルがクリックされないようにする
+
+
             }, 200);  // 0.3秒後に画像を差し替える
         }, { once: true }); // 一度だけクリック可能にする
 
@@ -165,8 +238,6 @@ const moveThreeCards = () => {
         label.style.fontWeight = 'bold';
         label.style.textShadow = '2px 2px 4px rgba(255, 255, 255, 0.3)'; // テキストの影を追加して読みやすくする
         label.style.pointerEvents = 'none'; // ラベルがクリックされないようにする
-
-
 
     });
 };
