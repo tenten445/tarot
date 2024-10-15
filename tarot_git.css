@@ -31,7 +31,7 @@ body::before {
     opacity: 0.5;
     z-index: -2;
     animation: moveStars 60s linear infinite; /* 星を動かすアニメーションを追加 */
-    /*will-change: transform, opacity; /* 追加 */
+    will-change: transform, opacity; /* 追加 */
 }
 #btn img {
     user-drag: none;
