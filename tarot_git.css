@@ -2,13 +2,11 @@ body {
     background: linear-gradient(135deg, #0d0d26 30%, #4b006e 70%);
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* 追加 */
     height: 100vh;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;   
-    overflow: hidden;
 }
 
 
