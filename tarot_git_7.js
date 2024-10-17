@@ -161,15 +161,15 @@ const returnToPile = () => {
 const moveThreeCards = () => {
     // 表示させる位置
     const positions = [
-        { left: '30%', top: '20%' },
-        { left: '30%', top: '60%' },
-        { left: '40%', top: '70%' },
+        { left: '20%', top: '20%' },
+        { left: '20%', top: '60%' },
+        { left: '35%', top: '70%' },
         { left: '50%', top: '80%' },
-        { left: '60%', top: '70%' },
-        { left: '70%', top: '60%' },
-        { left: '70%', top: '20%' }
+        { left: '65%', top: '70%' },
+        { left: '80%', top: '60%' },
+        { left: '80%', top: '20%' }
     ];
-    const labels = ["Past", "Now", "Future"];
+    const labels = ["過去", "現在", "近い未来","対策","周囲","障害","結果"];
 
     make_random(22);
 
@@ -234,7 +234,7 @@ const moveThreeCards = () => {
 
         // ラベルのCSSスタイルを設定
         label.style.position = 'absolute';
-        label.style.top = `calc(${positions[index].top} - 20%)`; // カードの少し上に表示
+        label.style.top = `calc(${positions[index].top} - 15%)`; // カードの少し上に表示
         label.style.left = positions[index].left;
         label.style.transform = 'translateX(-50%)';  // 水平中央に調整
         label.style.color = 'white'; // テキストの色
